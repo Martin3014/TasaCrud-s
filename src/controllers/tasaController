@@ -1,0 +1,57 @@
+const controller = {};
+
+
+controller.list = (req, res) => {
+  req.getConnection((err, conn) => {
+    conn.query('SELECT * FROM Tasa', (err, tasa) =>{
+        if(err){
+            res.json(err);
+        }
+        tasa.forEach(element => {
+            console.log(element.id);
+        });
+        res.render('tasa', {
+            data: tasa
+        });
+    });
+  });
+};
+
+controller.save = (req, res) => {
+    const data = req.body;
+
+    req.getConnection((err, conn) => {
+        conn.query('INSERT INTO Tasa SET ?', [data], (err, rows) =>{
+            if (err) {
+                console.log(err);
+                res.send('Error al guardar la tasa.');
+            } else {
+                console.log(rows);
+                res.redirect('/');
+            }
+        });
+    });
+};
+
+controller.delete = (req, res) => {
+    const { id} = req.params;
+
+    req.getConnection((err, conn) =>{
+        conn.query('DELETE FROM Tasa WHERE id = ? ', [id], (err, rows)=>{
+            res.redirect('/');
+        })
+    });
+};
+
+controller.update = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, conn) =>{
+        conn.query('SELECT * FROM Tasa WHERE id = ?', [id], (err, rows) =>{
+            res.redirect('/', {
+                data: rows[0]
+            })
+        });
+    });
+}
+
+module.exports = controller;
