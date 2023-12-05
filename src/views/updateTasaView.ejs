@@ -1,12 +1,13 @@
-<%- include ("partials/header") %>
+<!--Se le da funcionalidad a la vista de guardar cambios -->
+
+<%- include ("partials/header.ejs") %>
 <body>
-    <%- include ("partials/navbar") %>
     <div class="container mt-5">
         <div class="row">
             <div class="card">
                 <div class="card-body">
                     <form action="/update/<%= data.id %>" method="post">  
-                        <!--Update form -->
+                        <!--Se actualiza el formulario -->
                         <div class="form-group">
                             <input type="text" name="name" value="<%= data.name %>" class="form-control">
                             <input type="text" name="description" value="<%= data.description %>" class="form-control">
@@ -18,6 +19,6 @@
             </div>
         </div>
     </div>
-    <%- include ("partials/footer") %>
+    <%- include ("partials/footer.ejs") %>
 </body>
 </html>
