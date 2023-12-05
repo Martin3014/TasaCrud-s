@@ -1,17 +1,6 @@
-
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CRUD Tasa de cambio</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
-  </head>
-  <body>
-
-    <nav class="navbar navbar-dark bg-dark">
-      <a href= "/" class= "navbar-brand">CRUD Tasa de cambio</a>
-    </nav>
+<%- include ("partials/header") %>
+<body>
+    <%- include ("partials/navbar") %>
     
 <div class="container">
     <div class="row mt-5">
@@ -59,34 +48,7 @@
         </div>
     </div>
 </div>
-
-
-<div class= "container mt-5"> 
-    <div class=" row">
-        <div class="card">
-            <div class="card-body">
-                <form action="/update/<%= data.id %>" method="post">  
-                    <div class=" form-group">
-                        <input type="text" name="tasa" value="<%= data.tasa  %>" class="form-control">
-                        <input type="text" name="description" value=" <%= data.description  %> " class="form-control">
-                        <input type="text" name="Fecha" value=" <%= data.fecha  %> " class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Editar</button>
-                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
+<%- include ("partials/footer") %>
 
 </body>
 </html>
