@@ -12,6 +12,7 @@ router.post('/add', tasaController.save);
 router.get('/delete/:id', tasaController.delete);
 router.get('/update/:id', tasaController.update);
 router.post('/update/:id', tasaController.updateDatos);
+//router.get();
 
 //Exportar las rutas
 module.exports = router;

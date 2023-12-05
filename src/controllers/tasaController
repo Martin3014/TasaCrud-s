@@ -54,7 +54,7 @@ controller.delete = (req, res) => {
 
 // Actualizar una tasa de cambio
 
-    controller.update = (req, res) => {
+ controller.update = (req, res) => {
         const { id } = req.params;
 
         req.getConnection((err, conn) =>{
@@ -90,5 +90,26 @@ controller.updateDatos = (req, res) => {
         });
     });
 };
+
+
+//Función para obtener la tasa de cambio actual desde una API
+async function tasaDesdeAPI() {
+    try {  
+        const response = await fetch('https://api.hacienda.go.cr/indicadores/tc/dolar');
+
+        if (!response.ok) {
+            throw new Error('No se pudo obtener la tasa de cambio desde la API');
+        } 
+
+        const data = await response.json();
+        const tasaDeCambio = data.tasa;
+
+        return tasaDeCambio;
+
+    } catch (error) {
+        console.error('Error al obtener la tasa de cambio desde la API:', error);
+        throw error;
+    }
+}
 
 module.exports = controller;
