@@ -1,55 +1,55 @@
-<%- include ("partials/header.ejs") %>
-<body>
-    <!--Se crea la tabulación que muestra el contenido de la base de datos -->
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-7">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Tasa</th>
-                        <th>Descripcion</th>
-                        <th>Fecha</th>
-                    </tr>
-               </thead>
-                <tbody> 
-                    <% data.forEach(function(tasa) { %>
+    <%- include ("partials/header.ejs") %>
+    <body>
+        <!--Se crea la tabulación que muestra el contenido de la base de datos -->
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
                         <tr>
-                            <td><%= tasa.name %></td>
-                            <td><%= tasa.description %></td>
-                            <td><%= tasa.fecha %></td>
-                            <td>
-                                <a href="/update/<%= tasa.id %>" class="btn-sm btn-secondary">
-                                    <i class="fas fa-marker">Edit</i>
-                                </a>
-                                <a href="/delete/<%= tasa.id %>" class="btn-sm btn-danger">
-                                    <i class="far fa-trash-alt">Remove</i>
-                                </a>
-                            </td>
+                            <th> Colón      CRC</th>
+                            <th>Resultado</th>
+                            <th>Fecha</th>
                         </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </div>
-    <!--Se agrega funcionalidad al botón guardar cambios  -->    
-        <div class="col-md-5">
-          <div class="card">
-            <div class="card-body">
-                <form action="/add" method="post">  
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Tasa" class="form-control">
-                        <input type="text" name="description" placeholder="Description" class="form-control">
-                        <input type="text" name="fecha" placeholder="Fecha" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>                
+                </thead>
+                    <tbody> 
+                        <% data.forEach(function(tasa) { %>
+                            <tr>
+                                <td><%= tasa.colones %></td>
+                            <td><%= tasa.usd.toFixed(2) %></td> 
+                            <td><%= tasa.fecha%></td>
+                                <td>
+                                    <a href="/update/<%= tasa.id %>" class="btn-sm btn-secondary">
+                                        <i class="fas fa-marker">Edit</i>
+                                    </a>
+                                    <a href="/delete/<%= tasa.id %>" class="btn-sm btn-danger">
+                                        <i class="far fa-trash-alt">Remove</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
             </div>
-          </div>
+        <!--Se agrega funcionalidad al botón guardar cambios  -->    
+            <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add" method="post">  
+                        <div class="form-group">
+                            <input type="text" name="colones" placeholder="Colones" class="form-control">
+                        <!--  <input type="text" name="description" placeholder="Description" class="form-control"> -->
+                            <input type="text" name="fecha" placeholder="Fecha" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>                
+                </div>
+            </div>
+            </div>
         </div>
     </div>
-</div>
-<%- include ("partials/footer") %>
+    <%- include ("partials/footer") %>
 
-</body>
-</html>
+    </body>
+    </html>
 

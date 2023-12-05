@@ -6,10 +6,11 @@ controller.list = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query('SELECT * FROM Tasa', (err, tasa) =>{
         if(err){
-            res.json(err);
+            console.error(err); 
+            return res.status(500).send('Error al obtener datos de la base de datos');
         }
-        tasa.forEach(element => {
-            console.log(element.id);
+       tasa.forEach(element => {
+           console.log(element.id);
         });
         res.render('tasa', {
             data: tasa
@@ -23,13 +24,16 @@ controller.list = (req, res) => {
 controller.save = (req, res) => {
     const data = req.body;
 
+        data.colones = parseFloat(data.colones);
+        data.usd = data.colones * 0.00188858;
+
     req.getConnection((err, conn) => {
         conn.query('INSERT INTO Tasa SET ?', [data], (err, rows) =>{
             if (err) {
                 console.log(err);
                 res.send('Error al guardar la tasa.');
-            } else {
-                console.log(rows);
+             } else {
+        //        console.log(rows);
                 res.redirect('/');
             }
         });
@@ -50,27 +54,30 @@ controller.delete = (req, res) => {
 
 // Actualizar una tasa de cambio
 
-controller.update = (req, res) => {
-    const { id } = req.params;
+    controller.update = (req, res) => {
+        const { id } = req.params;
 
-    req.getConnection((err, conn) =>{
-        conn.query('SELECT * FROM Tasa WHERE id= ?', [id], (err, rows) =>{
-            if (err) {
-                console.log(err);
-                res.redirect('/error');
-            }else{
-                res.render('updateTasaView', {
-                    data: rows[0]
-                });
-            };
+        req.getConnection((err, conn) =>{
+            conn.query('SELECT * FROM Tasa WHERE id= ?', [id], (err, rows) =>{
+                if (err) {
+                    console.log(err);
+                    res.redirect('/error');
+                }else{
+                    res.render('updateTasaView', {
+                        data: rows[0]
+                    });
+                };
+            });
         });
-    });
-};
+    };
 
 // Actualizar los datos de una tasa de cambio
 controller.updateDatos = (req, res) => {
     const { id } = req.params;
     const newTasa = req.body;
+
+    newTasa.colones = parseFloat(newTasa.colones);
+    newTasa.usd = newTasa.colones * 0.00188858;
 
     req.getConnection((err, conn) =>{
         conn.query('UPDATE Tasa SET ? WHERE id = ?', [newTasa, id], (err, rows) =>{
