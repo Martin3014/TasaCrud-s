@@ -1,5 +1,5 @@
-    <%- include ("partials/header.ejs") %>
-    <body>
+    <%- include ("partials/header") %>
+
         <!--Se crea la tabulación que muestra el contenido de la base de datos -->
     <div class="container">
         <div class="row mt-5">
@@ -38,10 +38,13 @@
                     <form action="/add" method="post">  
                         <div class="form-group">
                             <input type="text" name="colones" placeholder="Colones" class="form-control">
+                        </div>
                         <!--  <input type="text" name="description" placeholder="Description" class="form-control"> -->
+                        <div>
                             <input type="text" name="fecha" placeholder="Fecha" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                            <br>
+                             <button type="submit" class="btn btn-primary">Guardar</button>                        
                     </form>                
                 </div>
             </div>
@@ -50,6 +53,4 @@
     </div>
     <%- include ("partials/footer") %>
 
-    </body>
-    </html>
-
+ 
